@@ -15,8 +15,8 @@ namespace CampProj.Controllers
         [HttpPost]
         public IEnumerable<string> Get()
         {
-            List<string> admin = new List<string> {"admin"};
-            return admin;
+            List<string> adminList = new List<string> {"admin"};
+            return adminList;
         }
     }
 }
