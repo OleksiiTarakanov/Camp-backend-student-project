@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CampProj.Controllers
 {
     [ApiController]
     [Route("booking")]
     public class TableBookingController : Controller
-    {   
+    {
         [HttpGet("get")]
         public IEnumerable<TablePlace> Get()
         {
@@ -21,7 +18,7 @@ namespace CampProj.Controllers
                 TablePlace place = new TablePlace(false, false, false, null, i);
                 placesList.Add(place);
 
-               
+
                 if (place.Halfday)
                 {
                     place.Fullday = false;
@@ -52,7 +49,7 @@ namespace CampProj.Controllers
         [HttpDelete]
         public List<TablePlace> Delete(List<TablePlace> list)
         {
-            foreach(var i in list)
+            foreach (var i in list)
             {
                 Console.WriteLine(i);
             }
