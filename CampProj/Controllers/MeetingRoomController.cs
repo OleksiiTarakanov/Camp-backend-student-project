@@ -19,8 +19,8 @@ namespace CampProj.Controllers
             for (int i = 9; i <= 17; i++)
             {
                 var date = new DateTime(0, 0, 0, i, 30, 00);
-                MeetingRoomSlot firstSlot = new MeetingRoomSlot($"{i}:00", $"{i}:30", false);
-                MeetingRoomSlot secondSlot = new MeetingRoomSlot($"{i}:30", $"{i+1}:00", false);
+                MeetingRoomSlot firstSlot = new MeetingRoomSlot($"{i}:00", $"{i}:30", false, 0);
+                MeetingRoomSlot secondSlot = new MeetingRoomSlot($"{i}:30", $"{i+1}:00", false, 1);
 
                 meetingRoomTimeSlots.Add(firstSlot);
                 meetingRoomTimeSlots.Add(secondSlot);

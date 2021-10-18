@@ -8,13 +8,12 @@ namespace CampProj
     public class TablePlace
     {
 
-        public TablePlace(bool halfday, bool fullday, bool booked, string bookerName, int id)
+        public TablePlace(bool halfday, bool fullday, bool booked, string bookerName)
         {
             Halfday = halfday;
             Fullday = fullday;
             Booked = booked;
             BookerName = bookerName;
-            Id = id;
         }
 
         public bool Halfday { get; set; }

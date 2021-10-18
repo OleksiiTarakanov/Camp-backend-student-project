@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CampProj.Controllers
 {
@@ -9,11 +11,12 @@ namespace CampProj.Controllers
     public class TableBookingController : Controller
     {
         List<TablePlace> placesList = new List<TablePlace>();
+        private readonly AppDbContext _context;
 
-        TableBookingController() {
+        public TableBookingController(AppDbContext context) {
             for (int i = 1; i <= 30; i++)
             {
-                TablePlace place = new TablePlace(false, false, false, null, i);
+                TablePlace place = new TablePlace(false, false, false, null);
                 placesList.Add(place);
 
 
@@ -31,21 +34,28 @@ namespace CampProj.Controllers
                     place.BookerName = null;
                 }
             }
+
+            _context = context;
         }
 
-        [HttpGet("get")]
-        public IEnumerable<TablePlace> Get()
+        [HttpGet]
+        public async Task<List<TablePlace>> Get()
         {
-            placesList[6].Booked = true;
-            placesList[6].BookerName = "Tim";
+            var result = await _context.TablePlaces.ToListAsync();
+            return result;
+            //placesList[6].Booked = true;
+            //placesList[6].BookerName = "Tim";
 
-            return placesList;
+            //return placesList;
         }
 
         [HttpPost]
-        public IEnumerable<TablePlace> Post(List<TablePlace> list)
+        public async Task<IActionResult> Post()
         {
-            return list;
+            TablePlace place = new TablePlace(false, false, true, "Test");
+            _context.TablePlaces.Add(place);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         [HttpDelete]
