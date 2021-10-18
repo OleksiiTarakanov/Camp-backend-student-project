@@ -8,11 +8,9 @@ namespace CampProj.Controllers
     [Route("booking")]
     public class TableBookingController : Controller
     {
-        [HttpGet("get")]
-        public IEnumerable<TablePlace> Get()
-        {
-            List<TablePlace> placesList = new List<TablePlace> { };
+        List<TablePlace> placesList = new List<TablePlace>();
 
+        TableBookingController() {
             for (int i = 1; i <= 30; i++)
             {
                 TablePlace place = new TablePlace(false, false, false, null, i);
@@ -33,7 +31,11 @@ namespace CampProj.Controllers
                     place.BookerName = null;
                 }
             }
+        }
 
+        [HttpGet("get")]
+        public IEnumerable<TablePlace> Get()
+        {
             placesList[6].Booked = true;
             placesList[6].BookerName = "Tim";
 
