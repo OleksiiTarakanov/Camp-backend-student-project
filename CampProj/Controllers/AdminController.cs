@@ -12,11 +12,10 @@ namespace CampProj.Controllers
     public class AdminController : Controller
     {
         [HttpGet]
-        [HttpPost]
         public IEnumerable<string> Get()
         {
-            List<string> adminList = new List<string> {"admin"};
-            return adminList;
+            List<string> admin = new List<string> {"admin"};
+            return admin;
         }
     }
 }

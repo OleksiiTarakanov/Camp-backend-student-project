@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,31 @@ namespace CampProj.Controllers
 {
     [ApiController]
     [Route("meeting-room")]
-    public class MeetingRoomController : Controller
+    public class MeetingRoomController : ControllerBase
     {
-        [HttpGet]
-        [HttpPost]
-        public IEnumerable<double> Get()
+        [HttpGet("get")]
+        public IEnumerable<MeetingRoomSlot> Get()
         {
-            List<double> meetingRoomTimeSlots = new List<double> { };
+            List<MeetingRoomSlot> meetingRoomTimeSlots = new List<MeetingRoomSlot> { };
 
-            for (double i = 9; i <= 18; i+=0.5)
+            for (int i = 9; i <= 17; i++)
             {
-               meetingRoomTimeSlots.Add(i);
+                var date = new DateTime(0, 0, 0, i, 30, 00);
+                MeetingRoomSlot firstSlot = new MeetingRoomSlot($"{i}:00", $"{i}:30", false, 0);
+                MeetingRoomSlot secondSlot = new MeetingRoomSlot($"{i}:30", $"{i+1}:00", false, 1);
+
+                meetingRoomTimeSlots.Add(firstSlot);
+                meetingRoomTimeSlots.Add(secondSlot);
             }
+           
 
             return meetingRoomTimeSlots;
+        }
+
+        [HttpPost]
+        public IEnumerable<MeetingRoomSlot> Post(List<MeetingRoomSlot> list)
+        {
+            return list;
         }
     }
 }
